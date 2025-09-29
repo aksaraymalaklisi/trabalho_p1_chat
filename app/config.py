@@ -11,7 +11,6 @@ except Exception as exc:  # pragma: no cover - environment dependent
 	) from exc
 
 ROOT = Path(__file__).resolve().parents[1]
-
 class Settings(BaseSettings):
 	"""Application settings loaded from environment (or .env file).
 
