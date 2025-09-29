@@ -2,7 +2,6 @@ from __future__ import annotations
 from typing import Dict, Set
 from fastapi import WebSocket
 
-
 class WSManager:
     """Simple WebSocket room manager.
 

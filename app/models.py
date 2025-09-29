@@ -2,7 +2,6 @@ from __future__ import annotations
 from pydantic import BaseModel, Field, field_validator
 from datetime import datetime, timezone
 
-
 class MessageIn(BaseModel):
     username: str = Field(..., min_length=1, max_length=50)
     content: str = Field(..., min_length=1, max_length=1000)
@@ -14,7 +13,6 @@ class MessageIn(BaseModel):
     @field_validator("content", mode="before")
     def strip_content(cls, v):
         return str(v).strip()
-
 
 class MessageOut(BaseModel):
     # Use plain string for `id` (alias `_id`) to avoid depending on pydantic
@@ -29,8 +27,7 @@ class MessageOut(BaseModel):
     model_config = {
         "populate_by_name": True,
     }
-
-
+    
 def serialize(doc: dict) -> dict:
     """Serialize a MongoDB document into JSON-friendly dict."""
     d = dict(doc)

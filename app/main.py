@@ -12,7 +12,6 @@ from .models import serialize
 from .database import get_db
 from .routes import messages as messages_router
 
-
 app = FastAPI(title="FastAPI Chat + MongoDB Atlas")
 app.add_middleware(
     CORSMiddleware,
@@ -22,23 +21,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 # mount static files
 app.mount("/static", StaticFiles(directory="app/static"), name="static")
-
 
 @app.get("/", include_in_schema=False)
 async def index():
     return FileResponse("app/static/index.html")
 
-
 # include routes
 app.include_router(messages_router.router)
 
-
 # websocket manager
 manager = WSManager()
-
 
 @app.websocket("/ws/{room}")
 async def ws_room(ws: WebSocket, room: str):
